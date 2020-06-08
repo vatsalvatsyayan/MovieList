@@ -1,0 +1,33 @@
+<html>
+<head>
+	<title></title>
+    <!-- <link rel="stylesheet" href="/assets/styles.css"  > -->
+    <script type="text/javascript" src ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<h1>Results page</h1>
+<body>
+<ul>
+<% data["Search"].forEach(function(movie){ %>
+    <li> 
+        <%= movie["Title"] %> - <%= movie["Year"] %>  
+        <% var query = movie["imdbID"] %>
+        <% var ink = "http://www.omdbapi.com/?i=" + query +"&apikey=e58f3a8e" %>
+       <a href="<%= ink %>">More Details</a> 
+        <% console.log(ink) %>  
+        
+    </li>
+     
+    <% }) %>
+</ul>
+
+
+
+
+   
+<a href="/">Search Again</a>
+<button>Click me</button>
+
+
+<script type ="text/javascript" src="assets/qas.js"></script>
+</body>
+</html>
