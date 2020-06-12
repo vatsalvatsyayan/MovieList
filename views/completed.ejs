@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Page</title>
+</head>
+<body>
+    
+    <h1>Your Completed List</h1>
+
+    
+    
+        
+        <% for(var i =0; i< user.length; i++){ %>
+            <li><%= user[i].Title %> - <%= user[i].Year %> - <%= user[i].Runtime %> </li>
+           
+            
+    
+    
+            
+    
+    
+      <%  } %>
+    
+    </ul>
+    <% var sum = 0; %>
+    <% for(var i =0; i<user.length; i++){ %>
+        
+        <% var str = user[i].Runtime %>
+        <% var num = parseFloat(str) %>
+        <% sum =sum + num; %>
+        <% var hours = sum/60 %>
+        <% var days = hours/24 %>
+        
+    
+    <% }  %>
+    <p>Total Hours Watched: <%= hours.toFixed(2) %> hrs</p>
+    <p>Total Days Watched: <%= days.toFixed(2) %> days</p>
+
+    <p><a href="/towatch">View your To Watch list</a></p>
+    <p><a href="/">Search for another movie</a></p>
+    
+
+
+</body>
+</html>

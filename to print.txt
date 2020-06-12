@@ -1,0 +1,25 @@
+<% for(var i =0; i< todos.length; i++){ %>
+                <li><%= todos[i].Title %> - <%= todos[i].Year %> - <%= todos[i].Runtime %> </li>
+               
+                
+
+
+                
+
+
+          <%  } %>
+
+        </ul>
+        <% var sum = 0; %>
+        <% for(var i =0; i<todos.length; i++){ %>
+            
+            <% var str = todos[i].Runtime %>
+            <% var num = parseFloat(str) %>
+            <% sum =sum + num; %>
+            <% hours = sum/60 %>
+            <% days = hours/24 %>
+            
+
+       <% }  %>
+       <p>Total Hours Watched: <%= hours %></p>
+       <p>Total Days Watched: <%= days %></p>

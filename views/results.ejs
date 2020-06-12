@@ -8,15 +8,40 @@
 <body>
 <ul>
 <% data["Search"].forEach(function(movie){ %>
-    <li> 
-        <%= movie["Title"] %> - <%= movie["Year"] %>  
+    <li><form method="POST" action="/info">
+        <%= movie["Title"] %> - <%= movie["Year"]  %> - <%= movie["imdbID"] %>
         <% var query = movie["imdbID"] %>
         <% var ink = "http://www.omdbapi.com/?i=" + query +"&apikey=e58f3a8e" %>
-       <a href="<%= ink %>">More Details</a> 
-        <% console.log(ink) %>  
+
+        <input type="hidden" name="movielink" value="<%= ink %>">
+        <button type="submit" class="btn-submit">More Details</button>
+    </form>
+        
+    <form method="POST" action="/completed">
+        <% var query = movie["imdbID"] %>
+        <% var ink = "http://www.omdbapi.com/?i=" + query +"&apikey=e58f3a8e" %>
+
+        <input type="hidden" name="movielink" value="<%= ink %>">
+        <button type="submit" class="btn-submit">Add to Completed</button>
+    </form>
+
+    <form method="POST" action="/towatch">
+        <% var query = movie["imdbID"] %>
+        <% var ink = "http://www.omdbapi.com/?i=" + query +"&apikey=e58f3a8e" %>
+
+        <input type="hidden" name="movielink" value="<%= ink %>">
+        <button type="submit" class="btn-submit">Add to Watch List</button>
+    </form>
+        
+       
+         
+
+       
         
     </li>
      
+
+
     <% }) %>
 </ul>
 
