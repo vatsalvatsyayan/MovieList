@@ -25,11 +25,13 @@
     
     </ul>
     <% var sum = 0; %>
+    <% var hours = 0; %>
+    <% var days = 0; %>
     <% for(var i =0; i<user.length; i++){ %>
         
         <% var str = user[i].Runtime %>
         <% var num = parseFloat(str) %>
-        <% sum =sum + num; %>
+        <% sum = sum + num; %>
         <% var hours = sum/60 %>
         <% var days = hours/24 %>
         
