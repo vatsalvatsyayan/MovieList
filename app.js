@@ -12,7 +12,8 @@ var movieSchema = new mongoose.Schema({
     Title: String,
     Year: String,
     Runtime: String,
-    imdbRating: String
+    imdbRating: String,
+    imdbID: String
 });
 
 var completed = mongoose.model('completed',movieSchema);
@@ -51,7 +52,7 @@ app.get('/results',function(req,res){
 });
 
 app.post('/info',urlencoded, function(req,res){
-    console.log(req.body.movielink);
+    
 
     request(req.body.movielink,function(error, response, body){
         if(!error && response.statusCode >= 200){
@@ -63,24 +64,37 @@ app.post('/info',urlencoded, function(req,res){
 });
 
 app.post('/completed',urlencoded, function(req,res){
-    console.log(req.body.movielink);
+    
 
     request(req.body.movielink,function(error, response, body){
         if(!error && response.statusCode >= 200){
             var data = JSON.parse(body);
 
+            console.log(data);
+
             var complete = {
                 Title: data.Title,
                 Year: data.Year,
                 Runtime: data.Runtime,
-                imdbRating: data.imdbRating
+                imdbRating: data.imdbRating,
+                imdbID: data.imdbID
             }
 
-            var addToCompleted = completed(complete).save(function(err,completed){
-                if(err) throw err;
-                res.render("search");
-
+            
+            completed.find({imdbID:data.imdbID},function(err, check){
+                if(check.length != 0){
+                    
+                    res.render("exists");
+                }else{
+                    var addToCompleted = completed(complete).save(function(err,completed){
+                        if(err) throw err;
+                        res.render("search");
+        
+                    })
+                }
             })
+
+            
             
             
         
@@ -100,7 +114,7 @@ app.get('/completed',function(req,res){
 })
 
 app.post('/towatch',urlencoded, function(req,res){
-    console.log(req.body.movielink);
+  
 
     request(req.body.movielink,function(error, response, body){
         if(!error && response.statusCode >= 200){
@@ -111,14 +125,24 @@ app.post('/towatch',urlencoded, function(req,res){
                 Title: data.Title,
                 Year: data.Year,
                 Runtime: data.Runtime,
-                imdbRating: data.imdbRating
+                imdbRating: data.imdbRating,
+                imdbID:data.imdbID
             }
 
-            var addToWatch = toWatch(pending).save(function(err,completed){
-                if(err) throw err;
-                res.render("search");
-
+            toWatch.find({imdbID:data.imdbID},function(err,check){
+                if(check.length!=0){
+                    res.render("exists");
+                }else{
+                    var addToWatch = toWatch(pending).save(function(err,completed){
+                        if(err) throw err;
+                        res.render("search");
+        
+                    })
+                }
             })
+
+
+           
         }
     })
 
@@ -127,6 +151,8 @@ app.post('/towatch',urlencoded, function(req,res){
 app.get('/towatch',function(req,res){
     toWatch.find({}, function(err,towatch){
         if(err) throw err;
+        
+        
         res.render("towatch",{user:towatch});
     });
 })
