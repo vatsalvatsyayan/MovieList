@@ -1,20 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<%- include('partials/header') -%>
+
+
+<style type="text/css">
+    body{
+        background-image: url("https://images4.alphacoders.com/217/thumb-350-217234.jpg");
+        background-size: cover;
+    }
+</style> 
 
     <h1>Your Plans to Watch List</h1>
-
+    <ol>
     <% user.forEach(function(movie){ %>
-        <li>  <%= movie["Title"] %> - <%= movie["Year"]  %> - <%= movie["imdbID"] %> </li>
-    
+        <div class="col-md-3">
+            <div class="well text-center">
+        <li>  <%= movie["Title"] %> - <%= movie["Year"] %> - (<%= movie["Runtime"] %>)  </li>
+            </div>
+        </div>
         <% }) %>
     
         <p><a href="/completed">View your completed list</a></p>
         <p><a href="/">Search for another movie</a></p>
-</body>
-</html>
+
+    </ol>
+ <%- include('partials/footer') -%>

@@ -1,58 +1,48 @@
-<html>
-<head>
-	<title></title>
-    <!-- <link rel="stylesheet" href="/assets/styles.css"  > -->
-    <script type="text/javascript" src ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<h1>Results page</h1>
-<body>
-<ul>
+<%- include('partials/header') -%>
+
+<style type="text/css">
+    
+
+    body{
+        background-image: url("https://wallpaperplay.com/walls/full/4/1/4/210505.jpg");
+         background-size: cover;
+    }
+</style> 
+
+
+
 <% data["Search"].forEach(function(movie){ %>
-    <li><form method="POST" action="/info">
+    <li>
         <%= movie["Title"] %> - <%= movie["Year"]  %> - <%= movie["imdbID"] %>
         <% var query = movie["imdbID"] %>
         <% var ink = "http://www.omdbapi.com/?i=" + query +"&apikey=e58f3a8e" %>
+        
+        <form method="POST" action="/info">
+      
 
         <input type="hidden" name="movielink" value="<%= ink %>">
-        <button type="submit" class="btn-submit">More Details</button>
+        <button type="submit" class="btn btn-primary">More Details</button>
     </form>
         
     <form method="POST" action="/completed">
-        <% var query = movie["imdbID"] %>
-        <% var ink = "http://www.omdbapi.com/?i=" + query +"&apikey=e58f3a8e" %>
+      
 
         <input type="hidden" name="movielink" value="<%= ink %>">
         <button type="submit" class="btn-submit">Add to Completed</button>
     </form>
 
     <form method="POST" action="/towatch">
-        <% var query = movie["imdbID"] %>
-        <% var ink = "http://www.omdbapi.com/?i=" + query +"&apikey=e58f3a8e" %>
+        
 
         <input type="hidden" name="movielink" value="<%= ink %>">
-        <button type="submit" class="btn-submit">Add to Watch List</button>
+        <button type="submit" class="btn btn-info">Add to Watch List</button>
+
     </form>
-        
-       
-         
-
-       
-        
-    </li>
-     
-
-
-    <% }) %>
+</li>
+<% }) %>
 </ul>
 
-
-
-
-   
 <a href="/">Search Again</a>
 <button>Click me</button>
 
-
-<script type ="text/javascript" src="assets/qas.js"></script>
-</body>
-</html>
+<%- include('partials/footer') -%>

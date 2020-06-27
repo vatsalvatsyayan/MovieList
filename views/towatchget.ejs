@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<%- include('partials/header') -%>
 
     <% user.forEach(function(movie){ %>
         <li>  <%= movie["Title"] %> - <%= movie["Year"]  %> - <%= movie["imdbID"] %> </li>
@@ -14,5 +7,5 @@
     
         <p><a href="/completed">View your completed list</a></p>
         <p><a href="/">Search for another movie</a></p>
-</body>
-</html>
+        
+<%- include('partials/footer') -%>

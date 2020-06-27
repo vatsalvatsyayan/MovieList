@@ -20,9 +20,8 @@ var completed = mongoose.model('completed',movieSchema);
 var toWatch  = mongoose.model('toWatch',movieSchema);
 
 var bodyParser = require('body-parser');
+mongoose.set('useFindAndModify', false);
 
-
-var towatch = [];
 
 
 
@@ -38,12 +37,9 @@ app.get('/results',function(req,res){
 
     request(url,function(error, response, body){
         if(!error && response.statusCode >= 200){
-            // console.log(body);
+           
             var data = JSON.parse(body);
-            //res.send(data)
             
-            
-
             res.render("results",{data:data})
         }
     });
@@ -65,13 +61,12 @@ app.post('/info',urlencoded, function(req,res){
 
 app.post('/completed',urlencoded, function(req,res){
     
-
     request(req.body.movielink,function(error, response, body){
         if(!error && response.statusCode >= 200){
             var data = JSON.parse(body);
 
             console.log(data);
-
+            
             var complete = {
                 Title: data.Title,
                 Year: data.Year,
@@ -80,8 +75,7 @@ app.post('/completed',urlencoded, function(req,res){
                 imdbID: data.imdbID
             }
 
-            
-            completed.find({imdbID:data.imdbID},function(err, check){
+             completed.find({imdbID:data.imdbID},function(err, check){
                 if(check.length != 0){
                     
                     res.render("exists");
@@ -92,14 +86,7 @@ app.post('/completed',urlencoded, function(req,res){
         
                     })
                 }
-            })
-
-            
-            
-            
-        
-
-            
+            })    
         }
     })
 
@@ -115,21 +102,21 @@ app.get('/completed',function(req,res){
 
 app.post('/towatch',urlencoded, function(req,res){
   
-
     request(req.body.movielink,function(error, response, body){
         if(!error && response.statusCode >= 200){
             var data = JSON.parse(body);
 
-            
+            console.log(data);
+
             var pending = {
                 Title: data.Title,
                 Year: data.Year,
                 Runtime: data.Runtime,
                 imdbRating: data.imdbRating,
-                imdbID:data.imdbID
+                imdbID: data.imdbID
             }
 
-            toWatch.find({imdbID:data.imdbID},function(err,check){
+            toWatch.find({imdbID: data.imdbID},function(err,check){
                 if(check.length!=0){
                     res.render("exists");
                 }else{
@@ -140,9 +127,7 @@ app.post('/towatch',urlencoded, function(req,res){
                     })
                 }
             })
-
-
-           
+   
         }
     })
 
@@ -156,6 +141,22 @@ app.get('/towatch',function(req,res){
         res.render("towatch",{user:towatch});
     });
 })
+
+app.post("/toremove/:id",function(req,res){
+    
+    completed.findByIdAndRemove(req.params.id,function(err){
+        if(err){
+            res.send("error");
+        } else {
+            res.send("done");
+        }
+    })
+
+    
+})
+
+
+
 
 
 

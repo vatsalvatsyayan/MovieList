@@ -1,12 +1,33 @@
-<!-- <link rel="stylesheet" href="/assets/styles.css"  > -->
+<%- include('partials/header') -%>
 
-<h1>Search for a movie</h1>
+<style type="text/css">
+    .jumbotron{
+    margin-top: 20px;
+    margin-right: 60%;
+   background-color: black;
+}
 
-<form action="/results" method="GET">
-    <input type="text" placeholder="search term" name="search">
-    <input type="submit">
-</form>
+    body{
+        background-image: url("https://wallpapercave.com/wp/wp2073454.jpg");
+         background-size: cover;
+    }
+</style>
+
+<div class="container">
+    <div class="jumbotron" >
+        <h3 class="text-center">Search For A Movie</h3>
+        <form class="text-center" action="/results" method="GET">
+            <input type="text" placeholder="Type a Movie here" name="search">
+            <input type="submit">
+        </form>
+        </div>
+</div>
 
 
-<p><a href="/towatch">View your To Watch list</a></p>
-<p><a href="/completed">View your completed list</a></p>
+
+
+
+<!-- <p><a href="/towatch">View your To Watch list</a></p>
+<p><a href="/completed">View your completed list</a></p> -->
+
+<%- include('partials/footer') -%>

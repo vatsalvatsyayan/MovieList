@@ -1,29 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Completed Page</title>
-</head>
-<body>
-    
+<%- include('partials/header') -%>
+<style type="text/css">
+    body{
+        background-image: url("https://images3.alphacoders.com/118/thumb-350-118437.jpg");
+        background-size: cover;
+        color:white;
+    }
+</style> 
     <h1>Your Completed List</h1>
-
-    
-    
-        
+    <ol>
         <% for(var i =0; i< user.length; i++){ %>
-            <li><%= user[i].Title %> - <%= user[i].Year %> - <%= user[i].Runtime %> </li>
-           
+            <div class="col-md-3">
+                <div class="well text-center">
+                
+                    <li>
+                        
+                            <%= user[i].Title %> - <%= user[i].Year %> (<%= user[i].Runtime %>) 
+                        
+                    </li>
+                    </div>
+            </div>
             
+         <%  } %>
     
-    
-            
-    
-    
-      <%  } %>
-    
-    </ul>
+        </ol>
     <% var sum = 0; %>
     <% var hours = 0; %>
     <% var days = 0; %>
@@ -44,6 +43,4 @@
     <p><a href="/">Search for another movie</a></p>
     
 
-
-</body>
-</html>
+    <%- include('partials/footer') -%>

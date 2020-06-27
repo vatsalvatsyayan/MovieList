@@ -1,12 +1,12 @@
-<html>
-<head>
-	<title></title>
-    <!-- <link rel="stylesheet" href="/assets/styles.css"  > -->
-    <script type="text/javascript" src ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<h1>Results page</h1>
-<body>
-    
+<style type="text/css">
+    body{
+        background-image: url("https://i.pinimg.com/564x/05/94/c9/0594c9f0ee9bd01dec087f548e03db58.jpg");
+        background-size: cover;
+        color: black;
+    }
+</style> 
+
+<%- include('partials/header') -%>
     
     <p>Movie Data</p>      
     <li>
@@ -58,9 +58,4 @@
     <li>
       <strong>IMDB Rating:</strong>  <%= data['imdbRating'] %>
     </li>
-
-
-
-
-</body>
-</html>
+<%- include('partials/footer') -%>
